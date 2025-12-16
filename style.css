@@ -1,0 +1,108 @@
+
+/* 1. VARIAVEIS DE COR: DEFINICAO DE TEMAS          */
+/* O bloco :root define as cores padrao (Modo Claro)*/
+/* ================================================= */
+:root {
+    /* Modo Claro (Light Mode) */
+    --cor-fundo-geral: whitesmoke; /* Cinza bem claro */
+    --cor-fundo-container: white;
+    --cor-texto: black; /* Texto preto */
+    --cor-fundo-li: whitesmoke; /* Fundo dos itens de lista */
+    /* Nomes de cores nao suportam sombra, entao esta linha sera removida ou mantida com RGBA: */
+    --cor-borda-container: 0 0 10px black(0,0,0,0.1); 
+}
+
+/* O bloco .dark-mode sobrescreve as variaveis para o Modo Escuro */
+.dark-mode {
+    --cor-fundo-geral: black; /* Fundo preto */
+    --cor-fundo-container: rgb(20, 20, 20); /* Um cinza escuro */
+    --cor-texto: white; /* Texto branco */
+    --cor-fundo-li: darkgray; /* Fundo dos itens de lista cinza */
+    --cor-borda-container: none;
+}
+
+
+/* ================================================= */
+/* 2. ESTILOS GERAIS DE ESTRUTURA E LAYOUT          */
+/* Aplicados a todo o corpo do documento.           */
+/* ================================================= */
+body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    background-color: var(--cor-fundo-geral); 
+    color: var(--cor-texto);
+    transition: background-color 0.3s, color 0.3s;
+    position:relative;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: var(--cor-fundo-container); 
+    width: 300px; 
+    margin: 50px auto; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: var(--cor-borda-container);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* ================================================= */
+/* 3. ESTILOS DOS ELEMENTOS DA LISTA E BOTÕES       */
+/* ================================================= */
+
+#inputTarefa {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid gray; /* Usando nome de cor */
+    border-radius: 4px;
+}
+
+/* Estilo do input no modo escuro para o texto e fundo */
+.dark-mode #inputTarefa {
+    background-color: whitesmoke; 
+    color: black; 
+}
+
+
+#listaDeTarefas {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li { 
+    background: var(--cor-fundo-li); 
+    margin: 8px 0; 
+    padding: 10px; 
+    border-radius: 4px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    transition: background 0.3s;
+}
+
+button { 
+    cursor: pointer; 
+    background-color: green; /* Cor verde para adicionar */
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.botao-deletar { 
+    background-color: red; /* Cor vermelha para deletar */
+    margin-left: 10px;
+    padding: 5px 8px; 
+    font-weight: bold;
+}
+
+#btnModoEscuro {
+    position: absolute;
+    top: -40px;
+    right: 10px;
+    background-color: blue; /* Cor azul para o botão de modo */
+    margin-bottom: 10px;
+}
