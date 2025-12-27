@@ -100,6 +100,9 @@ listaDeTarefas.addEventListener('click', function (e) {
         inputEdit.type = 'text';
         inputEdit.value = t.texto;
         inputEdit.className = 'edit-input';
+        inputEdit.setAttribute('autocomplete', 'off');
+        inputEdit.setAttribute('spellcheck', 'false');
+        inputEdit.name = 'edit-' + t.id;
 
         span.replaceWith(inputEdit);
         inputEdit.focus();
