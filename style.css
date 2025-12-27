@@ -8,8 +8,8 @@
     --cor-fundo-container: white;
     --cor-texto: black; /* Texto preto */
     --cor-fundo-li: whitesmoke; /* Fundo dos itens de lista */
-    /* Nomes de cores nao suportam sombra, entao esta linha sera removida ou mantida com RGBA: */
-    --cor-borda-container: 0 0 10px black(0,0,0,0.1); 
+    /* Nomes de cores nao suportam sombra; usar RGBA */
+    --cor-borda-container: 0 0 10px rgba(0,0,0,0.1);
 }
 
 /* O bloco .dark-mode sobrescreve as variaveis para o Modo Escuro */
@@ -32,19 +32,19 @@ body {
     background-color: var(--cor-fundo-geral); 
     color: var(--cor-texto);
     transition: background-color 0.3s, color 0.3s;
-    position:relative;
     margin: 0;
     padding: 0;
 }
 
 .container {
     background: var(--cor-fundo-container); 
-    width: 300px; 
+    width: 320px; 
     margin: 50px auto; 
     padding: 20px; 
     border-radius: 8px; 
     box-shadow: var(--cor-borda-container);
     transition: background 0.3s, box-shadow 0.3s;
+    position: relative;
 }
 
 /* ================================================= */
@@ -60,8 +60,9 @@ body {
 
 /* Estilo do input no modo escuro para o texto e fundo */
 .dark-mode #inputTarefa {
-    background-color: whitesmoke; 
-    color: black; 
+    background-color: #333; 
+    color: white; 
+    border: 1px solid #555;
 }
 
 
@@ -84,7 +85,6 @@ li {
 
 button { 
     cursor: pointer; 
-    background-color: green; /* Cor verde para adicionar */
     color: white; 
     border: none; 
     padding: 8px 12px; 
@@ -92,17 +92,20 @@ button {
     transition: background-color 0.2s;
 }
 
-.botao-deletar { 
-    background-color: red; /* Cor vermelha para deletar */
-    margin-left: 10px;
-    padding: 5px 8px; 
-    font-weight: bold;
+/* Botões específicos */
+button:not(.botao-deletar):not(.botao-editar):not(.botao-toggle):not(#btnModoEscuro) {
+    background-color: #2e7d32; /* verde */
 }
+
+.botao-toggle { background-color: orange; margin-right: 8px; padding: 6px 8px; }
+.botao-editar { background-color: #1976d2; margin-left: 8px; padding: 6px 8px; }
+.botao-deletar { background-color: #c62828; margin-left: 8px; padding: 6px 8px; font-weight: bold; }
 
 #btnModoEscuro {
     position: absolute;
-    top: -40px;
+    top: 10px;
     right: 10px;
-    background-color: blue; /* Cor azul para o botão de modo */
-    margin-bottom: 10px;
+    background-color: #1565c0; /* Cor azul para o botão de modo */
 }
+
+.concluida { text-decoration: line-through; opacity: 0.7; }
