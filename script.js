@@ -22,13 +22,12 @@ function criarElementoTarefa(tarefa) {
     const span = document.createElement('span');
     span.textContent = tarefa.texto;
     if (tarefa.feita) span.classList.add('concluida');
-
     const div = document.createElement('div');
 
-    const btnToggle = document.createElement('button');
-    btnToggle.type = 'button';
-    btnToggle.className = 'botao-toggle';
-    btnToggle.textContent = tarefa.feita ? 'Desfazer' : 'Concluir';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'botao-check';
+    checkbox.checked = tarefa.feita;
 
     const btnEditar = document.createElement('button');
     btnEditar.type = 'button';
@@ -40,10 +39,9 @@ function criarElementoTarefa(tarefa) {
     btnDeletar.className = 'botao-deletar';
     btnDeletar.textContent = 'X';
 
-    div.appendChild(btnToggle);
     div.appendChild(btnEditar);
     div.appendChild(btnDeletar);
-
+    li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(div);
     return li;
@@ -84,9 +82,9 @@ listaDeTarefas.addEventListener('click', function (e) {
         return;
     }
 
-    if (e.target.classList.contains('botao-toggle')) {
+    if (e.target.classList.contains('botao-check')) {
         const t = tarefas.find(x => x.id === id);
-        if (t) t.feita = !t.feita;
+        if (t) t.feita = e.target.checked;
         salvarTarefas();
         renderizarTarefas();
         return;
@@ -135,13 +133,17 @@ listaDeTarefas.addEventListener('click', function (e) {
 
 function alternarModo() {
     document.body.classList.toggle('dark-mode');
-    btnModoEscuro.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Escuro';
-    localStorage.setItem('modoEscuro', document.body.classList.contains('dark-mode') ? '1' : '0');
+    const dark = document.body.classList.contains('dark-mode');
+    btnModoEscuro.textContent = dark ? '☀️' : '🌙';
+    btnModoEscuro.setAttribute('aria-label', dark ? 'Ativar modo claro' : 'Ativar modo escuro');
+    localStorage.setItem('modoEscuro', dark ? '1' : '0');
 }
 
 function carregarModo() {
     if (localStorage.getItem('modoEscuro') === '1') document.body.classList.add('dark-mode');
-    btnModoEscuro.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Escuro';
+    const dark = document.body.classList.contains('dark-mode');
+    btnModoEscuro.textContent = dark ? '☀️' : '🌙';
+    btnModoEscuro.setAttribute('aria-label', dark ? 'Ativar modo claro' : 'Ativar modo escuro');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
